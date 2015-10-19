@@ -1,0 +1,2 @@
+exportPattern("^[[:alpha:]]+")
+importFrom("stats", "optim", "optimize", "quantile", "sd", "var")

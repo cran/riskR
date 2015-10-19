@@ -1,0 +1,16 @@
+cbec6880f221010bda79a7ff4664edaa *DESCRIPTION
+7b65d95b728369c67fc33d1e2737d79d *NAMESPACE
+1695ab4cd65cee516660a0281094bcc2 *R/risk.R
+20bc57dcd3b37fcf6c6901b143bf43d5 *R/risk.decision.R
+a6088495a62d5d74138d592a74445656 *R/risk.hedge.R
+a7bbcc111f8f497c18d37621e868d6f0 *R/risk.port.R
+455a3fc4b70210c212d504957fd2d30b *R/risk.req.R
+100613c0c717d666adc6ca0921762efa *R/risk.roll.R
+ac3c01f2f3ed7599ec5e7dc02e50ece1 *build/partial.rdb
+d42b9507caa7f3b2097337d0f6a11bda *man/risk.Rd
+f143290a67c90ae94b2ea2f0d8dc86e8 *man/risk.decision.Rd
+597f0cd003164340fc123769cc81e4cf *man/risk.hedge.Rd
+9535b8c98f75c40a39140261313e5abe *man/risk.port.Rd
+32785f1695ad7beb9336cb7f53c86dad *man/risk.req.Rd
+1551286115123e555e10e528342d5c15 *man/risk.roll.Rd
+36b1b0ba48cbef58e59cdda3a62ff372 *man/riskR-package.Rd
