@@ -4,30 +4,34 @@
 Decides the best alternative based on risk measures
 }
 \description{
-Decides the best alternative based on risk measures (EL, VAR, StD, AbD, SeD, E.StD, E.AbD, E.SeD, VaR, ES, EVaR, ENT, SD, SDR, ML) 
+Decides the best alternative based on risk measures (StD, VaR, EL, ELD, ES, SDR, EVaR, DEVaR, ENT, DENT, ML) 
 by choosing that with maximum ratio between mean and risk.
 }
 \usage{
-risk.decision(x, alpha = c(0.05), beta = 1)
+risk.decision(x, alpha = c(0.05), beta = 1, p = 2)
 }
 \arguments{
   \item{x}{
 a matrix of observations with each column representing an investment alternative.
 }
   \item{alpha}{
-a vector of probabilities for quantiles.
+a vector of probabilities for significance level.
 }
   \item{beta}{
-a [0,1] risk aversion parameter for mean-deviation measures.
+a positive risk aversion parameter.
+}
+  \item{p}{
+a positive value for the power of deviation terms.
 }
 }
 \value{
-A matrix with a numeric indicating which is column that represents the best investment alternative for each risk measure at all quantiles of interest.
+A matrix with a numeric indicating which is column that represents the best investment alternative for each risk measure at all probabilities of interest.
 }
 \examples{
-## Decides which is the best investment alternative.
+## Decides which is the best investment alternative among AAPL, BAC, DOW and SUNE.
 
-s <- matrix(rt(4000, df = 6), ncol = 4)
+data(returns)
+s <- returns[, 3:6]
 risk.decision(s, c(0.01, 0.05))
 }
 

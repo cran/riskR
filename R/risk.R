@@ -1,7 +1,7 @@
 risk <-
-function(x, alpha = c(0.05), beta = 1)
+function(x, alpha = c(0.05), beta = 1, p = 2)
 {
- EL = VAR = StD = AbD = SeD = E_StD = E_AbD = E_SeD = VaR = ES = EVaR = ENT = SD = SDR = ML = rep(0, length(alpha))
+ StD = VaR = EL = ELD = ES = SDR = EVaR = DEVaR = ENT = DENT = ML = rep(0, length(alpha))
  expect <- function(x, alpha)
  {
   int <- function(e)
@@ -13,23 +13,19 @@ function(x, alpha = c(0.05), beta = 1)
  }
  for (i in 1 : length(alpha))
   {
-   EL[i] = -mean(x)
-   VAR[i] = var(x)
    StD[i] = sd(x)
-   AbD[i] = mean(abs(x - mean(x)))
-   SeD[i] = sqrt(mean(ifelse(x < mean(x), (x - mean(x))^2, 0)))
-   E_StD[i] = EL[i] + beta * StD[i]
-   E_AbD[i] = EL[i] + beta * AbD[i]
-   E_SeD[i] = EL[i] + beta * SeD[i]
    VaR[i] = -quantile(x, alpha[i])
+   EL[i] = -mean(x)
+   ELD[i] = EL[i] + beta * (mean(ifelse(x < -EL[i], (x - (-EL[i]))^p, 0)))^(1/p)
    ES[i] = -mean(x[x < -VaR[i]])
+   SDR[i] = ES[i] + beta * (mean(ifelse(x < -ES[i], (x - (-ES[i]))^p, 0)))^(1/p)
    EVaR[i] = -expect(x, alpha[i])
+   DEVaR[i] = EVaR[i] + beta * (mean(ifelse(x < -EVaR[i], (x - (-EVaR[i]))^p, 0)))^(1/p)
    ENT[i] = (1 / beta) * log(mean(exp(-beta * x)))
-   SD[i] = sqrt(mean(ifelse(x < -ES[i], (x - (-ES[i]))^2, 0)))
-   SDR[i] = ES[i] + beta * SD[i]
+   DENT[i] = ENT[i] + beta * (mean(ifelse(x < -ENT[i], (x - (-ENT[i]))^p, 0)))^(1/p)
    ML [i] = -min(x)
   }
- ans <- rbind(EL, VAR, StD, AbD, SeD, E_StD, E_AbD, E_SeD, VaR, ES, EVaR, ENT, SD, SDR, ML)
+ ans <- rbind(StD, VaR, EL, ELD, ES, SDR, EVaR, DEVaR, ENT, DENT, ML)
  colnames(ans) <- paste(round(100*alpha, 2), "%", sep="")
  return(ans)
 }

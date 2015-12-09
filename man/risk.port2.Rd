@@ -1,15 +1,15 @@
-\name{risk.port}
-\alias{risk.port}
+\name{risk.port2}
+\alias{risk.port2}
 \title{
 Computes optimal weights of portfolio based on risk measures
 }
 \description{
 Computes optimal weights of portfolio strategy based on risk measures 
 (StD, VaR, EL, ELD, ES, SDR, EVaR, DEVaR, ENT, DENT, ML) 
-by minimization of the composed position risk. Weights are restricted to be non-negative and with unit sum.
+by maximization of the ratio between composed position return and risk. Weights are restricted to be non-negative and with unit sum.
 }
 \usage{
-risk.port(x, alpha = c(0.05), beta = 1, p = 2)
+risk.port2(x, alpha = c(0.05), beta = 1, p = 2)
 }
 \arguments{
   \item{x}{
@@ -33,6 +33,5 @@ An array with optimal weight for each risk measure at all probabilities of inter
 
 data(returns)
 s <- returns[1:100, 3:6]
-risk.port(s, 0.05)
+risk.port2(s, 0.05)
 }
-

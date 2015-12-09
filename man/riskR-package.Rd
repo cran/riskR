@@ -17,3 +17,5 @@ The DESCRIPTION file:
 
 Maintainer: \packageMaintainer{riskR}
 }
+\references{
+Righi, M. (2015). Loss-Deviation risk measures. Working Paper. Available in: http://arxiv.org/abs/1511.06943}

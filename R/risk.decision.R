@@ -1,16 +1,16 @@
 risk.decision <-
-function(x, alpha = c(0.05), beta = 1)
+function(x, alpha = c(0.05), beta = 1, p = 2)
 {
  x = as.matrix(x)
- D = matrix(rep(0, 15 * length(alpha)), ncol = length(alpha))
- M = array(rep(0, 15 * length(alpha) * dim(x)[2]), dim = c(15, length(alpha), dim(x)[2]))
+ D = matrix(rep(0, 11 * length(alpha)), ncol = length(alpha))
+ M = array(rep(0, 11 * length(alpha) * dim(x)[2]), dim = c(11, length(alpha), dim(x)[2]))
  N = rep(0, dim(x)[2])
  for (m in 1 : dim(x)[2])
  {
-  M[,,m] = mean(x[,m]) / risk(x[,m], alpha, beta)
+  M[,,m] = mean(x[,m]) / risk(x[,m], alpha, beta, p)
   N[m] = mean(x[,m])
  }
- for (j in 1 : 15)
+ for (j in 1 : 11)
  {
   for (k in 1 : length(alpha))
   { 
@@ -24,6 +24,6 @@ function(x, alpha = c(0.05), beta = 1)
   }
  }
  colnames(D) <- paste(round(100*alpha, 2), "%", sep="")
- rownames(D) <- c("EL", "VAR", "StD", "AbD", "SeD", "E_StD", "E_AbD", "E_SeD", "VaR", "ES", "EVaR", "ENT", "SD", "SDR", "ML")
+ rownames(D) <- c("StD", "VaR", "EL", "ELD", "ES", "SDR", "EVaR", "DEVaR", "ENT", "DENT", "ML")
  return(D)
 }

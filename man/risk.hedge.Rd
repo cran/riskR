@@ -4,11 +4,11 @@
 Computes optimal hedging ratios based on risk measures
 }
 \description{
-Determines optimal hedging ratios based on risk measures (EL, VAR, StD, AbD, SeD, E.StD, E.AbD, E.SeD, VaR, ES, EVaR, ENT, SD, SDR, ML) 
+Determines optimal hedging ratios based on risk measures (StD, VaR, EL, ELD, ES, SDR, EVaR, DEVaR, ENT, DENT, ML) 
 by minimization of position risk.
 }
 \usage{
-risk.hedge(x, y, alpha = c(0.05), beta = 1)
+risk.hedge(x, y, alpha = c(0.05), beta = 1, p = 2)
 }
 \arguments{
   \item{x}{
@@ -18,20 +18,24 @@ a vector of observations.
 a vector of observations of the asset used for hedging.
 }
   \item{alpha}{
-a vector of probabilities for quantiles.
+a vector of probabilities for significance level.
 }
   \item{beta}{
-a [0,1] risk aversion parameter for mean-deviation measures.
+a positive risk aversion parameter.
+}
+  \item{p}{
+a positive value for the power of deviation terms.
 }
 }
 \value{
-A matrix with values of optimal hedging ratios for each risk measure at all quantiles of interest.
+A matrix with values of optimal hedging ratios for each risk measure at all probabilities of interest.
 }
 \examples{
-## computes optimal hedging ratios.
+## computes optimal hedging ratios between AAPL and SP500.
 
-s <- rnorm(1000)
-h <- rt(1000, df = 6)
+data(returns)
+s <- returns[, 3]
+h <- returns[, 2]
 risk.hedge(s, h, c(0.01, 0.05))
 }
 
